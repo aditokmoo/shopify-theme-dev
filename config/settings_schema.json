@@ -1,0 +1,12 @@
+[
+    {
+        "name": "Best Sellers",
+        "settings": [
+            {
+                "type": "product_list",
+                "id": "best_sellers",
+                "label": "Select Best Sellers"
+            }
+        ]
+    }
+]
