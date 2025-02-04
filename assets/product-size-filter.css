@@ -1,0 +1,19 @@
+.product-size-filter {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+}
+
+.product-size-filter__label {
+    font-size: 1.6rem;
+}
+
+.product-size-filter__select {
+    width: 100%;
+    padding: .7rem;
+    background-color: transparent;
+    border: 1px solid #c0c0c0;
+    font-family: "Manrope", sans-serif;
+    font-size: 1.4rem;
+}

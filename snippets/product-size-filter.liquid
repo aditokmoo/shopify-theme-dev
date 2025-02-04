@@ -1,0 +1,13 @@
+{{ 'product-size-filter.css' | asset_url | stylesheet_tag }}
+
+
+<div class="product-size-filter">
+    <label for="product-size-filter__label">Size:</label>
+    <select id="product-size-filter__select" class="product-size-filter__select" name="id">
+        {% for variant in product.variants %}
+        <option value="{{ variant.id }}" {% if forloop.first %}selected{% endif %}>
+            {{ variant.title }}
+        </option>
+        {% endfor %}
+    </select>
+</div>

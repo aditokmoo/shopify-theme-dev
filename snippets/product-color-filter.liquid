@@ -1,0 +1,20 @@
+{{ 'product-color-filter.css' | asset_url | stylesheet_tag }}
+
+<div class="product-color-filter">
+    <label class="product-color-filter__label">Color:</label>
+    <div class="product-color-filter__options">
+        {% assign colors = "" %}
+
+        {% for variant in product.variants %}
+        {% assign color = variant.option1 | downcase %}
+
+        {% unless colors contains color %}
+        <label class="product-color-filter__circle" style="background-color: {{ color | replace: 'clear', '#fff' }};"
+            title="{{ variant.option1 }}">
+            <input type="radio" name="color" value="{{ variant.id }}" hidden>
+        </label>
+        {% assign colors = colors | append: color | append: "," %}
+        {% endunless %}
+        {% endfor %}
+    </div>
+</div>

@@ -19,6 +19,8 @@
           <span class="best-sellers__rate">5 STARS</span>
         </div>
         <h3 class="best-sellers__name">{{ product.title }}</h3>
+        {% render 'product-size-filter', product: product %}
+        {% render 'product-color-filter', product: product %}
       </div>
 
       {% render 'add-to-cart-button', price: product.price, button_label: 'ADD' %}
