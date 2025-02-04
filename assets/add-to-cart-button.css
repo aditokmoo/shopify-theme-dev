@@ -1,0 +1,23 @@
+.product-form {
+    width: 100%;
+}
+
+.product-form__button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .8rem;
+    width: 100%;
+    border: 0;
+    background-color: #D52F27;
+    color: #fff;
+    text-align: center;
+    padding: 1.3rem;
+    border-radius: 5rem;
+    cursor: pointer;
+    transition: .2s;
+
+    &:hover {
+        opacity: .8;
+    }
+}

@@ -1,0 +1,11 @@
+{{ 'add-to-cart-button.css' | asset_url | stylesheet_tag }}
+
+<form method="post" action="/cart/add" class="product-form">
+    <input type="hidden" name="id" value="{{ product.variants.first.id }}">
+
+    <button class="product-form__button">
+        {{ button_label }}
+        <span>-</span>
+        <span class="product-form__price">{{ price | money }}</span>
+    </button>
+</form>

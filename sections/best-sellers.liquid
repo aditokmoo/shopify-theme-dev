@@ -1,3 +1,32 @@
-<div class="best-sellers-container">
-    <h2>Best Sellers</h2>
-</div>
+{{ 'best-sellers.css' | asset_url | stylesheet_tag }}
+
+<section class="best-sellers">
+    <h2 class="best-sellers__title">Shop Bestsellers</h2>
+    <div class="best-sellers__list">
+        {% assign best_sellers = collections['best-sellers'].products %}
+        {% assign sorted_best_sellers = best_sellers | sort: 'created_at' %}
+
+        {% if best_sellers.size > 0 %}
+        {% for product in sorted_best_sellers %}
+        <div class="best-sellers__item">
+            <a href="{{ product.url }}" class="best-sellers__link">
+                <img src="{{ product.featured_image | img_url: 'large' }}" alt="{{ product.title }}"
+                    class="best-sellers__image" width="100%" height="100%">
+            </a>
+            <div class="best-sellers__details">
+                <div class="best-sellers__rating">
+                    {% render 'rating-stars' %}
+                    <span class="best-sellers__rate">5 STARS</span>
+                </div>
+                <h3 class="best-sellers__name">{{ product.title }}</h3>
+            </div>
+
+            {% render 'add-to-cart-button', price: product.price, button_label: 'ADD' %}
+
+        </div>
+        {% endfor %}
+        {% else %}
+        <p class="best-sellers__message">No best sellers available.</p>
+        {% endif %}
+    </div>
+</section>

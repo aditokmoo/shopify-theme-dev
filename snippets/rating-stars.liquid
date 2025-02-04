@@ -1,0 +1,11 @@
+{{ 'rating-stars.css' | asset_url | stylesheet_tag }}
+
+{% assign rating = product.average_rating %}
+<div class="rating-stars">
+    {% for i in (1..5) %}
+    {% if i <= rating %} <i class="fas fa-star filled"></i>
+        {% else %}
+        <i class="fas fa-star filled"></i>
+        {% endif %}
+        {% endfor %}
+</div>
