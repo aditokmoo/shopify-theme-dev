@@ -25,7 +25,26 @@ document.addEventListener("DOMContentLoaded", function () {
             productIndex = selectedProducts.length - 1;
         }
 
-        updateSizeOptions(defaultColor, variantData, sizeSelect);
+        function updateSizeOptions(selectedColor) {
+            const availableSizes = variantData
+                .filter(v => v.color.toLowerCase() === selectedColor.toLowerCase() && v.available === 'true');
+
+            sizeSelect.querySelectorAll("option").forEach(option => {
+                const isAvailable = availableSizes.some(sizeObj =>
+                    sizeObj.size.toLowerCase() === option.value.toLowerCase() && sizeObj.available
+                );
+
+                option.disabled = !isAvailable;
+            });
+
+            if (!availableSizes.includes(sizeSelect.value)) sizeSelect.value = availableSizes[0]?.size;
+            if (availableSizes.length === 0) {
+                sizeSelect.innerHTML = `<option value="">None</option>`;
+                sizeSelect.disabled = true;
+            }
+        }
+
+        updateSizeOptions(defaultColor);
 
         sizeSelect.addEventListener("change", function () {
             selectedProducts[productIndex].size = this.value;
@@ -58,34 +77,13 @@ document.addEventListener("DOMContentLoaded", function () {
         },
         breakpoints: {
             1200: { slidesPerView: 4 },
-            750: { slidesPerView: 3 },
-            400: { slidesPerView: 2 },
-            300: { slidesPerView: 1 },
+            850: { slidesPerView: 3 },
+            450: { slidesPerView: 2 },
+            0: { slidesPerView: 1 },
         },
         navigation: {
             nextEl: '.swiper-button-next',
             prevEl: '.swiper-button-prev',
         },
     });
-
-
 });
-
-function updateSizeOptions(selectedColor, variantData, sizeSelect) {
-    const availableSizes = variantData
-        .filter(v => v.color.toLowerCase() === selectedColor.toLowerCase() && v.available === 'true');
-
-    sizeSelect.querySelectorAll("option").forEach(option => {
-        const isAvailable = availableSizes.some(sizeObj =>
-            sizeObj.size.toLowerCase() === option.value.toLowerCase() && sizeObj.available
-        );
-
-        option.disabled = !isAvailable;
-    });
-
-    if (!availableSizes.includes(sizeSelect.value)) sizeSelect.value = availableSizes[0]?.size;
-    if (availableSizes.length === 0) {
-        sizeSelect.innerHTML = `<option value="">None</option>`;
-        sizeSelect.disabled = true;
-    }
-}

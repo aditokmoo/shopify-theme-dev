@@ -116,6 +116,12 @@
 
 @media (max-width: 1200px) {}
 
+@media (min-width: 751px) and (max-width: 850px) {
+    .best-sellers__list {
+        padding: 0 7rem;
+    }
+}
+
 @media (max-width: 749px) {
     .best-sellers__title {
         font-size: 3rem;
@@ -131,8 +137,8 @@
     }
 }
 
-@media (max-width: 400px) {
+@media (max-width: 450px) {
     .best-sellers {
-        padding: 0 4rem;
+        padding: 0 3rem;
     }
 }
