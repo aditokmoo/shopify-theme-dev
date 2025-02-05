@@ -7,11 +7,11 @@
 
         {% for variant in product.variants %}
         {% assign color = variant.option1 | downcase %}
-
         {% unless colors contains color %}
         <label class="product-color-filter__circle" style="background-color: {{ color | replace: 'clear', '#fff' }};"
             title="{{ variant.option1 }}">
-            <input type="radio" name="color" value="{{ variant.id }}" hidden>
+            <input type="radio" name="color" id="{{ product.id }}" value="{{ color }}" data-color="{{ color }}"
+                class="product-color-filter__input" hidden>
         </label>
         {% assign colors = colors | append: color | append: "," %}
         {% endunless %}

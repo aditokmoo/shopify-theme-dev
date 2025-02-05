@@ -3,21 +3,46 @@
 }
 
 .product-form__button {
+    margin: 0 auto;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: .8rem;
-    width: 100%;
-    border: 0;
     background-color: #D52F27;
+    border: 0;
+    border-radius: 5rem;
+    gap: .6rem;
     color: #fff;
+    width: 100%;
     text-align: center;
     padding: 1.3rem;
-    border-radius: 5rem;
     cursor: pointer;
     transition: .2s;
 
     &:hover {
         opacity: .8;
+    }
+}
+
+.product-form__price--original {
+    text-decoration: line-through;
+    color: #fff;
+    opacity: .8;
+    margin-left: .6rem;
+}
+
+.product-form__button--out-of-stock {
+    opacity: 0.5;
+    cursor: default;
+}
+
+.product-form__button--out-of-stock:hover {
+    opacity: 0.5;
+}
+
+
+
+@media (max-width: 749px) {
+    .product-form__button {
+        font-size: 1.1rem;
     }
 }

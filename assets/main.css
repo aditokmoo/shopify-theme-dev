@@ -4,13 +4,13 @@
     padding: 0;
     font-weight: inherit;
     margin: 0;
-    box-sizing: inherit;
+    box-sizing: border-box;
     font-family: inherit;
 }
 
 html {
     font-size: 62.5%;
-    box-sizing: border-box;
+    /* 1rem = 10px */
     scroll-behavior: smooth;
 }
 

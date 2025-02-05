@@ -2,12 +2,22 @@
 
 
 <div class="product-size-filter">
-    <label for="product-size-filter__label">Size:</label>
-    <select id="product-size-filter__select" class="product-size-filter__select" name="id">
+    <label for="product-size-filter__label" class="product-size-filter__label">Size:</label>
+    <select id="{{ product.id }}" class="product-size-filter__select">
+        {% assign sizes = "" %}
+
         {% for variant in product.variants %}
-        <option value="{{ variant.id }}" {% if forloop.first %}selected{% endif %}>
-            {{ variant.title }}
+        {%assign color = variant.option1 %}
+        {%assign size = variant.option2 %}
+
+        {% unless sizes contains size %}
+        <option value="{{ size }}" data-color="{{ variant.option1 }}" data-variant="{{ variant.id }}" {% if
+            variant.available==false %}disabled{% endif %}>
+            {{ variant.option2 | capitalize }}
         </option>
+        {% assign sizes = sizes | append: size | append: "," %}
+        {% endunless %}
+
         {% endfor %}
     </select>
 </div>

@@ -8,16 +8,33 @@
 .product-color-filter__options {
     display: flex;
     align-items: center;
-    gap: 1rem;
     width: 100%;
 }
 
 .product-color-filter__circle {
-    width: 25px;
-    height: 25px;
+    border: 4px dotted transparent;
     border-radius: 50%;
-    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    margin: 0.5rem;
     display: inline-block;
-    border: 2px solid transparent;
-    transition: border 0.3s ease-in-out;
+    cursor: pointer;
+    transition: border-color 0.3s ease;
 }
+
+.product-color-filter__circle.active {
+    border-color: red;
+}
+
+@media (max-width: 749px) {
+    .product-color-filter__options {
+        justify-content: center;
+    }
+
+    .product-size-filter__label,
+    .product-color-filter__label {
+        display: none;
+    }
+}
+
+@media (max-width: 400px) {}
