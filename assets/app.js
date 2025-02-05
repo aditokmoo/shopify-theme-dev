@@ -6,14 +6,13 @@ document.addEventListener("DOMContentLoaded", function () {
         const productId = product.id;
         const sizeSelect = product.querySelector('select');
         const colorSelects = product.querySelectorAll('.product-color-filter__input');
-        const variantData = JSON.parse(product.dataset.variants); // Čita JSON s varijantama
+        const variantData = JSON.parse(product.dataset.variants);
 
         let defaultColor = null;
         if (colorSelects.length > 0) {
             defaultColor = colorSelects[0].value;
             colorSelects[0].checked = true;
             colorSelects[0].closest('label').classList.add('active')
-            console.log(colorSelects)
         }
 
         let productIndex = selectedProducts.findIndex(p => p.id === productId);
@@ -26,30 +25,10 @@ document.addEventListener("DOMContentLoaded", function () {
             productIndex = selectedProducts.length - 1;
         }
 
-        function updateSizeOptions(selectedColor) {
-            const availableSizes = variantData
-                .filter(v => v.color.toLowerCase() === selectedColor.toLowerCase())
-                .map(v => v.size);
-
-            sizeSelect.querySelectorAll("option").forEach(option => {
-                if (availableSizes.includes(option.value)) {
-                    option.disabled = false;
-                } else {
-                    option.disabled = true;
-                }
-            });
-
-            // Postavi default size ako je trenutni disabled
-            if (!availableSizes.includes(sizeSelect.value)) {
-                sizeSelect.value = availableSizes[0] || "";
-            }
-        }
-
-        updateSizeOptions(defaultColor);
+        updateSizeOptions(defaultColor, variantData, sizeSelect);
 
         sizeSelect.addEventListener("change", function () {
             selectedProducts[productIndex].size = this.value;
-            console.log("Updated selectedProducts:", selectedProducts);
         });
 
         colorSelects.forEach(colorSelect => {
@@ -60,13 +39,10 @@ document.addEventListener("DOMContentLoaded", function () {
                     checked.classList.add('active')
                     selectedProducts[productIndex].color = this.value;
                     updateSizeOptions(this.value);
-                    console.log("Updated selectedProducts:", selectedProducts);
                 }
             });
         });
     });
-
-    console.log("Initial selectedProducts:", selectedProducts);
 
     new Swiper('.swiper', {
         slidesPerView: 4,
@@ -92,4 +68,24 @@ document.addEventListener("DOMContentLoaded", function () {
         },
     });
 
+
 });
+
+function updateSizeOptions(selectedColor, variantData, sizeSelect) {
+    const availableSizes = variantData
+        .filter(v => v.color.toLowerCase() === selectedColor.toLowerCase() && v.available === 'true');
+
+    sizeSelect.querySelectorAll("option").forEach(option => {
+        const isAvailable = availableSizes.some(sizeObj =>
+            sizeObj.size.toLowerCase() === option.value.toLowerCase() && sizeObj.available
+        );
+
+        option.disabled = !isAvailable;
+    });
+
+    if (!availableSizes.includes(sizeSelect.value)) sizeSelect.value = availableSizes[0]?.size;
+    if (availableSizes.length === 0) {
+        sizeSelect.innerHTML = `<option value="">None</option>`;
+        sizeSelect.disabled = true;
+    }
+}
