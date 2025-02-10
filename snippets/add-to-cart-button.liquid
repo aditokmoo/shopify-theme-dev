@@ -1,10 +1,13 @@
 {{ 'add-to-cart-button.css' | asset_url | stylesheet_tag }}
 
-<form method="post" action="/cart/add" class="product-form">
+<form class="product-form">
     <input type="hidden" name="id" value="{{ product.variants.first.id }}">
 
     {% if product.available %}
-    <button class="product-form__button">
+    <script>
+        console.log({{ product | json }})
+    </script>
+    <button class="product-form__button" id="add_to_cart" data-product-id="{{ product.id }}" data-quantity="1">
         {{ button_label }}
         <span>-</span>
         {% if product.compare_at_price > product.price %}
