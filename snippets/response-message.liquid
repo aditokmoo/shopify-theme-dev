@@ -1,0 +1,16 @@
+{{ 'response-message.css' | asset_url | stylesheet_tag }}
+
+<div id="response-message" class="response-message response__success">
+    <div class="response-message__content">
+        <img class="response-message__image" alt="product image" width="100" height="100" />
+        <div class="response-message__details">
+            <h3 class="response-message__title"></h3>
+            <p class="response-message__size"></p>
+            <p class="response-message__color" style="background-color: {{ color | replace: 'clear', '#fff' }};"></p>
+        </div>
+    </div>
+    <div class="response-message__cta">
+        <span class="response-message__text">Added!</span>
+        <a href="/cart" class="response-message__link">View Cart</a>
+    </div>
+</div>

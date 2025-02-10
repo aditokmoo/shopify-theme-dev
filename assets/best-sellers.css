@@ -125,7 +125,7 @@
 @media (max-width: 749px) {
     .best-sellers__title {
         font-size: 3rem;
-        padding: 5rem 0;
+        padding: 8rem 0 5rem 0;
     }
 
     .best-sellers__rating {

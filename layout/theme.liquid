@@ -23,7 +23,10 @@
         {{ content_for_layout }}
     </main>
 
+    {% render 'response-message' %}
+
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" defer></script>
+    <script src="{{ 'utils.js' | asset_url }}" defer></script>
     <script src="{{ 'product.js' | asset_url }}" defer></script>
     <script src="{{ 'cart.js' | asset_url }}" defer></script>
     <script src="{{ 'swiper-slider.js' | asset_url }}" defer></script>
