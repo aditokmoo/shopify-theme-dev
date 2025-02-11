@@ -4,21 +4,18 @@
     <input type="hidden" name="id" value="{{ product.variants.first.id }}">
 
     {% if product.available %}
-    <script>
-        console.log({{ product | json }})
-    </script>
     <button class="product-form__button" id="add_to_cart" data-product-id="{{ product.id }}" data-quantity="1">
         {{ button_label }}
         <span>-</span>
         {% if product.compare_at_price > product.price %}
-        <span class="product-form__price product-form__price--discounted">
+        <span class="product-form__price product-form__price--discounted" id="discount_price">
             {{ product.price | money }}
         </span>
-        <span class="product-form__price product-form__price--original">
+        <span class="product-form__price product-form__price--original" id="original_price">
             {{ product.compare_at_price | money }}
         </span>
         {% else %}
-        <span class="product-form__price">{{ product.price | money }}</span>
+        <span class="product-form__price" id="discount_price">{{ product.price | money }}</span>
         {% endif %}
     </button>
     {% else %}

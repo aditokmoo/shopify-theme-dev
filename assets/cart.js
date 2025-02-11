@@ -1,6 +1,5 @@
 class Cart {
     static async addToCart(variant, quantity) {
-        console.log(variant)
         const data = {
             items: [
                 {
@@ -23,7 +22,6 @@ class Cart {
             }
 
             const responseData = await response.json();
-            console.log('Added to cart:', responseData);
 
             showMessage(responseData?.items[0], 'success');
             return responseData;
